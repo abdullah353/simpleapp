@@ -65,3 +65,15 @@ I have used this url https://api.adorable.io/avatars/285/ which generates random
 So instead of storing images on local server i am using this service. And To generate this value for against each user i am using a default function in migration which will automatically fill the default value.
 https://github.com/mabdullah353/simpleapp/blob/master/database/migrations/2017_08_07_171852_add_image_to_users.php#L18 this way after some times new images will appear in dashboard.
 
+Migration
+====
+
+Database migrations are in this folder https://github.com/mabdullah353/simpleapp/tree/master/database/migrations
+
+And to seed with dummy users then this file holds the user information https://github.com/mabdullah353/simpleapp/tree/master/database/seeds
+
+```
+php artisan migrate:refresh --seed
+```
+This command will refresh the migration and seed the data base with dummy users.
+
