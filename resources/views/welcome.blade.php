@@ -8,15 +8,14 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/css/app.css"/>
         <link rel="stylesheet" type="text/css" href="css/app.css">  
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
+    <body ng-app="liimex">
+        <div customer-login></div>
+    </body>
 
-
-<body ng-app="liimex">
-<div customer-login></div>
-
-</body>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script>
-<script src="/js/app.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> 
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.js"></script>
+    <script src="/js/app.js"></script>
 </html>

@@ -4,27 +4,35 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     /**
-     * Show the profile for the given user.
+     * Handle an authentication attempt.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function authenticate(Request $request)
     {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
+        var_dump($request->input('email'));
+        var_dump($request->input('password'));
+        if (Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password')])) {
+
+            echo "Successfully signed in ";
+        }
+        echo "Unable ToSign in";
     }
 
     /**
-     * Show the profile for the given user.
+     * Singin the user.
      *
-     * @param  int  $id
      * @return Response
      */
-    public function Login($id)
+    public function Login()
     {
         echo "Login requeset";
     }
