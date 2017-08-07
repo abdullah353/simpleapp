@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Main routes for viewing dashboard.
+Route::get('/dashboard', 'DashboardController@index');
+Route::get('/', 'DashboardController@index');
 
-Route::post('sign','LoginController@authenticate');  
-Route::get('logout','LoginController@Logout');
+// Signing/register form routes.
+Route::get('/login', 'LoginController@login');
+Route::get('/register','LoginController@register');
+
+// Logout Route.
+Route::get('/logout','LoginController@logout');
+
+// Authenticate/Create user routes.
+Route::post('/authenticate','LoginController@authenticate');  
+Route::post('/store','LoginController@store');  
+

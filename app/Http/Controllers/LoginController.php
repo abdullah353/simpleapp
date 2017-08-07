@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -16,35 +18,63 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request)
     {
-        var_dump($request->input('email'));
-        var_dump($request->input('password'));
         if (Auth::attempt([
             'email' => $request->input('email'),
             'password' => $request->input('password')])) {
 
-            echo "Successfully signed in ";
+            return redirect('/dashboard');
         }
-        echo "Unable ToSign in";
+
+        return Redirect::back()
+            ->withInput()
+            ->withErrors(['Wrong username/password combination.']);
     }
 
     /**
-     * Singin the user.
-     *
-     * @return Response
+     * Show the registeration form to the client.
+     * @return view Laravel view for generating register panel.
      */
-    public function Login()
+    public function register()
     {
-        echo "Login requeset";
+        return view('register');
+    }
+
+
+    /**
+     * Show the login form to the client.
+     * @return view Laravel view for generating login panel.
+     */
+    public function login()
+    {
+        return view('login');
     }
 
     /**
-     * Show the profile for the given user.
-     *
-     * @piaram  int  $id
-     * @return Response
+     * Store new user in our databse.
+     * @param  Request  $request
      */
-    public function Logout()
+    public function store(Request $request)
     {
-        echo "Logout Session";
+        $newUser = $request->all();
+        $user = new User();
+
+        if(!$user->validate($newUser))
+        {
+            return view('register')->withErrors($user->errors());
+        }
+
+        $user->fill($newUser);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/dashboard');
+    }
+
+    /**
+     * Logout current signed user.
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

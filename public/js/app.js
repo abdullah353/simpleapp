@@ -7,4 +7,17 @@ angular.module('liimex', [])
     },
     templateUrl: '/js/templates/login.html'
   };
-});
+})
+.directive('customerRegister', function() {
+  return {
+    controller: function ( $scope, $element ) {
+        $scope.csrf = jQuery("meta[name=csrf-token]").attr("content");
+    },
+    templateUrl: '/js/templates/register.html'
+  };
+}).directive('alertError', function() {
+  return {
+    transclude: true,
+    templateUrl: '/js/templates/alert.html'
+  };    
+})
